@@ -15,9 +15,11 @@ namespace AppiumDriverDemo
 		[SetUp]
 		public void beforeAll(){
             var  capabilities = new AppiumOptions();
-			capabilities.AddAdditionalCapability("deviceName", "One Plus");
+			// These capabilities are passed in to the appium server by Device Farm
+			// We should not need to set these when in Device Farm's execution environment 
+			capabilities.AddAdditionalCapability("deviceName", "YOUR_DEVICE_NAME_HERE");
 			capabilities.AddAdditionalCapability("platformName", "Android");
-			capabilities.AddAdditionalCapability("app", "/Users/jmp/git/dotnet-core-device-farm-sample-tests/ApiDemos-debug.apk");
+			capabilities.AddAdditionalCapability("app", "PATH/TO/ApiDemos-debug.apk");
 			driver = new AndroidDriver<AppiumWebElement>(new Uri("http://127.0.0.1:4723/wd/hub"), 
                                capabilities);		
 		}
