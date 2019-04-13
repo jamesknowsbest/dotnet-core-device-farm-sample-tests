@@ -45,8 +45,7 @@ mono ./NUnit/bin/net35/nunit3-console.exe bin/Debug/netcoreapp2.2/publish/dotnet
 ## How to create a test package for Device Farm
 
 ```
-dotnet restore
-msbuild
+dotnet pubish
 curl -sL https://github.com/nunit/nunit-console/releases/download/v3.10/NUnit.Console-3.10.0.zip -o NUnit.zip
 unzip NUnit.zip -d NUnit
 # copy mono from local installation on a mac

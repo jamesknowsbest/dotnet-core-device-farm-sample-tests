@@ -17,9 +17,9 @@ namespace AppiumDriverDemo
             var  capabilities = new AppiumOptions();
 			// These capabilities are passed in to the appium server by Device Farm
 			// We should not need to set these when in Device Farm's execution environment 
-			capabilities.AddAdditionalCapability("deviceName", "YOUR_DEVICE_NAME_HERE");
-			capabilities.AddAdditionalCapability("platformName", "Android");
-			capabilities.AddAdditionalCapability("app", "PATH/TO/ApiDemos-debug.apk");
+			// capabilities.AddAdditionalCapability("deviceName", "emulator-5554");
+			// capabilities.AddAdditionalCapability("platformName", "Android");
+			// capabilities.AddAdditionalCapability("app", "/PATH/TO/app-debug.apk");
 			driver = new AndroidDriver<AppiumWebElement>(new Uri("http://127.0.0.1:4723/wd/hub"), 
                                capabilities);		
 		}
@@ -34,10 +34,11 @@ namespace AppiumDriverDemo
 		public void AppiumDriverMethodsTestCase ()
 		{
 			// Using appium extension methods
-			// referenced https://github.com/appium-boneyard/sample-code/blob/master/sample-code/examples/dotnet/AppiumDotNetSample/Android/AndroidSearchingTest.cs#L69-L71
-			string byXPath = "//android.widget.TextView[contains(@text, 'Animat')]";
-            Assert.IsNotNull(driver.FindElementByXPath(byXPath).Text);
-			Assert.AreEqual(driver.FindElementsByXPath(byXPath).Count, 1);
+			// referenced https://github.com/appium-boneyard/sample-code/blob/master/sample-code/examples/dotnet/AppiumDotNetSample/Android/AndroidSearchingTest.cs#L53-L55
+			var HOMEPAGE_HEADLINE = "AWS Device Farm Sample App for Android";
+			By byAccessibilityId = new ByAccessibilityId("Homepage Headline");
+			var actual_homepage_headline = driver.FindElement(byAccessibilityId).Text;
+			Assert.AreEqual(actual_homepage_headline,HOMEPAGE_HEADLINE);
 		}
     }
 }
