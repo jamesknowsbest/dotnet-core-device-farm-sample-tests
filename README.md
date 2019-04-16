@@ -45,16 +45,64 @@ mono ./NUnit/bin/net35/nunit3-console.exe bin/Debug/netcoreapp2.2/publish/dotnet
 ## How to create a test package for Device Farm
 
 ```
-dotnet pubish
+dotnet publish
 curl -sL https://github.com/nunit/nunit-console/releases/download/v3.10/NUnit.Console-3.10.0.zip -o NUnit.zip
 unzip NUnit.zip -d NUnit
 # copy mono from local installation on a mac
 # find it's directory using `which mono`
 cp /usr/local/bin/mono .
 ## TODO: need to compile mono for ubuntu to include in test package
-zip -r test_package.zip bin NUnit mono
+zip -r test_package.zip bin NUnit
+
+zip -r test_package.zip *.csproj *.cs
 ```
 
 ## TODO: write commands for testspec.yml file and upload cli commands
 
+https://download.mono-project.com/runtimes/raw/?C=M;O=D
 
+[DeviceFarm] cat /etc/os-release
+NAME="Ubuntu"
+VERSION="14.04.5 LTS, Trusty Tahr"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 14.04.5 LTS"
+VERSION_ID="14.04"
+HOME_URL="http://www.ubuntu.com/"
+SUPPORT_URL="http://help.ubuntu.com/"
+BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
+
+Unhandled Exception:
+System.TypeInitializationException: The type initializer for 'NUnit.ConsoleRunner.Program' threw an exception. ---> System.TypeLoadException: Could not set up parent class, due to: Could not set up parent class, due to: Could not load type of field 'NUnit.Options.OptionSet:ValueOption' (1) due to: Could not load file or assembly 'System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' or one of its dependencies. assembly:/tmp/scratchS8oL48.scratch/test-packageMqlJjJ/NUnit/bin/net20/nunit3-console.exe type:OptionSet member:(null) assembly:/tmp/scratchS8oL48.scratch/test-packageMqlJjJ/NUnit/bin/net20/nunit3-console.exe type:CommandLineOptions member:(null)
+   --- End of inner exception stack trace ---
+[ERROR] FATAL UNHANDLED EXCEPTION: System.TypeInitializationException: The type initializer for 'NUnit.ConsoleRunner.Program' threw an exception. ---> System.TypeLoadException: Could not set up parent class, due to: Could not set up parent class, due to: Could not load type of field 'NUnit.Options.OptionSet:ValueOption' (1) due to: Could not load file or assembly 'System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' or one of its dependencies. assembly:/tmp/scratchS8oL48.scratch/test-packageMqlJjJ/NUnit/bin/net20/nunit3-console.exe type:OptionSet member:(null) assembly:/tmp/scratchS8oL48.scratch/test-packageMqlJjJ/NUnit/bin/net20/nunit3-console.exe type:CommandLineOptions member:(null)
+   --- End of inner exception stack trace ---
+ 
+
+mono --version
+Mono JIT compiler version 5.18.0.268 (tarball Tue Mar 12 08:31:42 GMT 2019)
+Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-project.com
+        TLS:           
+        SIGSEGV:       altstack
+        Notification:  kqueue
+        Architecture:  amd64
+        Disabled:      none
+        Misc:          softdebug 
+        Interpreter:   yes
+        LLVM:          supported, not enabled.
+        Suspend:       preemptive
+        GC:            sgen (concurrent by default)
+
+./mono/bin/mono --version
+Mono JIT compiler version 5.18.0.225 (2018-08/bac9fc1f889 Fri Dec 21 11:33:29 EST 2018)
+Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-project.com
+        TLS:           
+        SIGSEGV:       altstack
+        Notification:  kqueue
+        Architecture:  amd64
+        Disabled:      none
+        Misc:          softdebug 
+        Interpreter:   yes
+        LLVM:          yes(600)
+        Suspend:       preemptive
+        GC:            sgen (concurrent by default)mono --help

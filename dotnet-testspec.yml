@@ -22,24 +22,25 @@ phases:
       - echo "Navigate to test package directory"
       - cd $DEVICEFARM_TEST_PACKAGE_PATH
       - cat /etc/os-release
+      
+      # download dotnet version depending on OS
+      # https://github.com/dotnet/core/blob/master/release-notes/2.2/2.2.3/2.2.3-download.md
       - >-
         if [ $DEVICEFARM_DEVICE_PLATFORM_NAME = "Android" ];
         then
-            echo "Downloading mono for Linux"
-            curl -sL https://download.mono-project.com/runtimes/raw/mono-5.18.1-ubuntu-14.04-x64 -o mono.zip
+            echo "Downloading dotnet for Linux"
+            curl -sL "https://download.visualstudio.microsoft.com/download/pr/7d8f3f4c-9a90-42c5-956f-45f673384d3f/14d686d853a964025f5c54db237ff6ef/dotnet-sdk-2.2.105-linux-x64.tar.gz" -o dotnet-sdk-2.2.105.tar.gz
         fi
       - >-
         if [ $DEVICEFARM_DEVICE_PLATFORM_NAME = "iOS" ];
         then
-            echo "Downloading mono for macOS"
-            curl -sL "https://download.mono-project.com/runtimes/raw/mono-5.16.1-osx-10.9-x64" -o mono.zip
+            echo "Downloading dotnet for macOS"
+            curl -sL "https://download.visualstudio.microsoft.com/download/pr/47709d55-450a-4828-9e3a-de65aef7c2f2/f512dd0abf6989ce1800d4fd40a745d7/dotnet-sdk-2.2.105-osx-x64.tar.gz" -o dotnet-sdk-2.2.105.tar.gz
         fi
-      - unzip mono.zip -d /tmp/mono
-      - export MONO_PATH=/tmp/mono/lib/mono/4.5 
-      - /tmp/mono/bin/mono --version
+      - tar -xzf dotnet-sdk-2.2.105.tar.gz
+      - ./dotnet --version 
 
-     
-     
+    
   # The pre-test phase includes commands that setup your test environment.
   pre_test:
     commands:
@@ -81,7 +82,7 @@ phases:
       # Go into the root folder containing your source code and node_modules
       - echo "Start Appium C# test"
       # Enter the command below to start the tests . The comamnd should be similar to what you use to run the tests locally.
-      - /tmp/mono/bin/mono ./NUnit/bin/net35/nunit3-console.exe bin/Debug/netcoreapp2.2/publish/dotnet-core-device-farm-sample-tests.dll --output $DEVICEFARM_LOG_DIR
+      - ./dotnet test
   # The post test phase includes are commands that are run after your tests are executed.
   post_test:
     commands:
