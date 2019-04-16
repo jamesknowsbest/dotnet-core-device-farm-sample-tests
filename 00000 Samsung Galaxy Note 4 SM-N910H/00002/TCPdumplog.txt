@@ -1,0 +1,21 @@
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on wlan0, link-type EN10MB (Ethernet), capture size 262144 bytes
+23:55:02.756294 IP ip-192-168-1-10.us-west-2.compute.internal.49262 > sfo03s18-in-f10.1e100.net.https: Flags [FP.], seq 1808777470:1808777493, ack 62559543, win 1997, options [nop,nop,TS val 1620936 ecr 2133021915], length 23
+23:55:19.734559 IP ip-192-168-1-10.us-west-2.compute.internal.57478 > edge-star-mini-shv-01-sea1.facebook.com.https: Flags [S], seq 4240583103, win 65535, options [mss 1460,sackOK,TS val 1624332 ecr 0,nop,wscale 7], length 0
+23:55:19.749179 IP edge-star-mini-shv-01-sea1.facebook.com.https > ip-192-168-1-10.us-west-2.compute.internal.57478: Flags [S.], seq 2689452186, ack 4240583104, win 27960, options [mss 1360,sackOK,TS val 764999933 ecr 1624332,nop,wscale 8], length 0
+23:55:19.751063 IP ip-192-168-1-10.us-west-2.compute.internal.57478 > edge-star-mini-shv-01-sea1.facebook.com.https: Flags [.], ack 1, win 685, options [nop,nop,TS val 1624336 ecr 764999933], length 0
+23:55:19.760053 IP ip-192-168-1-10.us-west-2.compute.internal.57478 > edge-star-mini-shv-01-sea1.facebook.com.https: Flags [P.], seq 1:195, ack 1, win 685, options [nop,nop,TS val 1624337 ecr 764999933], length 194
+23:55:19.776118 IP edge-star-mini-shv-01-sea1.facebook.com.https > ip-192-168-1-10.us-west-2.compute.internal.57478: Flags [.], ack 195, win 114, options [nop,nop,TS val 764999960 ecr 1624337], length 0
+23:55:19.776920 IP edge-star-mini-shv-01-sea1.facebook.com.https > ip-192-168-1-10.us-west-2.compute.internal.57478: Flags [.], seq 1:1349, ack 195, win 114, options [nop,nop,TS val 764999961 ecr 1624337], length 1348
+23:55:19.776978 IP edge-star-mini-shv-01-sea1.facebook.com.https > ip-192-168-1-10.us-west-2.compute.internal.57478: Flags [.], seq 1349:2697, ack 195, win 114, options [nop,nop,TS val 764999961 ecr 1624337], length 1348
+23:55:19.777011 IP edge-star-mini-shv-01-sea1.facebook.com.https > ip-192-168-1-10.us-west-2.compute.internal.57478: Flags [P.], seq 2697:3068, ack 195, win 114, options [nop,nop,TS val 764999961 ecr 1624337], length 371
+23:55:19.779454 IP ip-192-168-1-10.us-west-2.compute.internal.57478 > edge-star-mini-shv-01-sea1.facebook.com.https: Flags [.], ack 1349, win 707, options [nop,nop,TS val 1624341 ecr 764999961], length 0
+23:55:19.780308 IP ip-192-168-1-10.us-west-2.compute.internal.57478 > edge-star-mini-shv-01-sea1.facebook.com.https: Flags [.], ack 2697, win 730, options [nop,nop,TS val 1624341 ecr 764999961], length 0
+23:55:19.780436 IP ip-192-168-1-10.us-west-2.compute.internal.57478 > edge-star-mini-shv-01-sea1.facebook.com.https: Flags [.], ack 3068, win 751, options [nop,nop,TS val 1624341 ecr 764999961], length 0
+23:55:19.882571 IP ip-192-168-1-10.us-west-2.compute.internal.57478 > edge-star-mini-shv-01-sea1.facebook.com.https: Flags [P.], seq 195:321, ack 3068, win 751, options [nop,nop,TS val 1624362 ecr 764999961], length 126
+23:55:19.899402 IP edge-star-mini-shv-01-sea1.facebook.com.https > ip-192-168-1-10.us-west-2.compute.internal.57478: Flags [P.], seq 3068:3119, ack 321, win 114, options [nop,nop,TS val 765000082 ecr 1624362], length 51
+23:55:19.901486 IP ip-192-168-1-10.us-west-2.compute.internal.57478 > edge-star-mini-shv-01-sea1.facebook.com.https: Flags [.], ack 3119, win 751, options [nop,nop,TS val 1624366 ecr 765000082], length 0
+23:55:20.072195 IP ip-192-168-1-10.us-west-2.compute.internal.57478 > edge-star-mini-shv-01-sea1.facebook.com.https: Flags [P.], seq 321:772, ack 3119, win 751, options [nop,nop,TS val 1624400 ecr 765000082], length 451
+23:55:20.072561 IP ip-192-168-1-10.us-west-2.compute.internal.57478 > edge-star-mini-shv-01-sea1.facebook.com.https: Flags [.], seq 772:2120, ack 3119, win 751, options [nop,nop,TS val 1624400 ecr 765000082], length 1348
+23:55:20.072659 IP ip-192-168-1-10.us-west-2.compute.internal.57478 > edge-star-mini-shv-01-sea1.facebook.com.https: Flags [P.], seq 2120:2347, ack 3119, win 751, options [nop,nop,TS val 1624400 ecr 765000082], length 227
+23:55:20.072985 IP ip-192-168-1-10.us-west-2.compute.internal.57478 > edge-star-mini-shv-01-sea1.facebook.com.https: Flags [P.], seq 2347:2888, ack 3119, win 751, options [nop,nop,TS val 1624400 ec

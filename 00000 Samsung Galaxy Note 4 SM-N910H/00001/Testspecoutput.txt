@@ -1,0 +1,124 @@
+[DEVICEFARM] Setting up your device. This usually takes 2-3 minutes.
+[DEVICEFARM] ########### Start executing testspec ###########
+ 
+ 
+[DEVICEFARM] ########### Entering phase install ###########
+ 
+[DeviceFarm] echo "Navigate to test package directory"
+Navigate to test package directory
+[DeviceFarm] cd $DEVICEFARM_TEST_PACKAGE_PATH
+[DeviceFarm] cat /etc/os-release
+NAME="Ubuntu"
+VERSION="14.04.5 LTS, Trusty Tahr"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 14.04.5 LTS"
+VERSION_ID="14.04"
+HOME_URL="http://www.ubuntu.com/"
+SUPPORT_URL="http://help.ubuntu.com/"
+BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
+[DeviceFarm] if [ $DEVICEFARM_DEVICE_PLATFORM_NAME = "Android" ]; then
+    echo "Downloading dotnet for Linux"
+    curl -sL "https://download.visualstudio.microsoft.com/download/pr/7d8f3f4c-9a90-42c5-956f-45f673384d3f/14d686d853a964025f5c54db237ff6ef/dotnet-sdk-2.2.105-linux-x64.tar.gz" -o dotnet-sdk-2.2.105.tar.gz
+fi
+Downloading dotnet for Linux
+[DeviceFarm] if [ $DEVICEFARM_DEVICE_PLATFORM_NAME = "iOS" ]; then
+    echo "Downloading dotnet for macOS"
+    curl -sL "https://download.visualstudio.microsoft.com/download/pr/47709d55-450a-4828-9e3a-de65aef7c2f2/f512dd0abf6989ce1800d4fd40a745d7/dotnet-sdk-2.2.105-osx-x64.tar.gz" -o dotnet-sdk-2.2.105.tar.gz
+fi
+[DeviceFarm] tar -xzf dotnet-sdk-2.2.105.tar.gz
+tar: .: Cannot utime: Operation not permitted
+tar: .: Cannot change mode to rwxr-xr-x: Operation not permitted
+tar: Exiting with failure status due to previous errors
+[DeviceFarm] ./dotnet --version
+2.2.105
+ 
+[DEVICEFARM] ########### Entering phase pre_test ###########
+ 
+[DeviceFarm] echo "Start appium server"
+Start appium server
+[DeviceFarm] appium --log-timestamp --device-name $DEVICEFARM_DEVICE_NAME --platform-name $DEVICEFARM_DEVICE_PLATFORM_NAME --app $DEVICEFARM_APP_PATH --udid $DEVICEFARM_DEVICE_UDID --chromedriver-executable $DEVICEFARM_CHROMEDRIVER_EXECUTABLE  >> $DEVICEFARM_LOG_DIR/appiumlog.txt 2>&1 &
+[DeviceFarm] start_appium_timeout=0; while [ true ]; do
+    if [ $start_appium_timeout -gt 60 ];
+    then
+        echo "appium server never started in 60 seconds. Exiting";
+        exit 1;
+    fi;
+    grep -i "Appium REST http interface listener started on 0.0.0.0:4723" $DEVICEFARM_LOG_DIR/appiumlog.txt >> /dev/null 2>&1;
+    if [ $? -eq 0 ];
+    then
+        echo "Appium REST http interface listener started on 0.0.0.0:4723";
+        break;
+    else
+        echo "Waiting for appium server to start. Sleeping for 1 second";
+        sleep 1;
+        start_appium_timeout=$((start_appium_timeout+1));
+    fi;
+done; 
+Waiting for appium server to start. Sleeping for 1 second
+Waiting for appium server to start. Sleeping for 1 second
+Waiting for appium server to start. Sleeping for 1 second
+Waiting for appium server to start. Sleeping for 1 second
+Waiting for appium server to start. Sleeping for 1 second
+Waiting for appium server to start. Sleeping for 1 second
+Waiting for appium server to start. Sleeping for 1 second
+Waiting for appium server to start. Sleeping for 1 second
+Waiting for appium server to start. Sleeping for 1 second
+Waiting for appium server to start. Sleeping for 1 second
+Waiting for appium server to start. Sleeping for 1 second
+Waiting for appium server to start. Sleeping for 1 second
+Waiting for appium server to start. Sleeping for 1 second
+Waiting for appium server to start. Sleeping for 1 second
+Waiting for appium server to start. Sleeping for 1 second
+Appium REST http interface listener started on 0.0.0.0:4723
+ 
+[DEVICEFARM] ########### Entering phase test ###########
+ 
+[DeviceFarm] echo "Start Appium C# test"
+Start Appium C# test
+[DeviceFarm] ./dotnet test
+
+Welcome to .NET Core!
+---------------------
+Learn more about .NET Core: https://aka.ms/dotnet-docs
+Use 'dotnet --help' to see available commands or visit: https://aka.ms/dotnet-cli-docs
+
+Telemetry
+---------
+The .NET Core tools collect usage data in order to help us improve your experience. The data is anonymous and doesn't include command-line arguments. The data is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
+
+Read more about .NET Core CLI Tools telemetry: https://aka.ms/dotnet-cli-telemetry
+
+Configuring...
+--------------
+A command is running to populate your local package cache to improve restore speed and enable offline access. This command takes up to one minute to complete and only runs once.
+Decompressing .......... 42406 ms
+Expanding .......... 126658 ms
+
+ASP.NET Core
+------------
+Successfully installed the ASP.NET Core HTTPS Development Certificate.
+To trust the certificate run 'dotnet dev-certs https --trust' (Windows and macOS only). For establishing trust on other platforms refer to the platform specific documentation.
+For more information on configuring HTTPS see https://go.microsoft.com/fwlink/?linkid=848054.
+Build started, please wait...
+Build completed.
+
+Test run for /tmp/scratch7tGQun.scratch/test-packager6xfO7/bin/Debug/netcoreapp2.2/dotnet-core-device-farm-sample-tests.dll(.NETCoreApp,Version=v2.2)
+Microsoft (R) Test Execution Command Line Tool Version 15.9.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+
+Total tests: 1. Passed: 1. Failed: 0. Skipped: 0.
+Test Run Successful.
+Test execution time: 47.6615 Seconds
+ 
+[DEVICEFARM] ########### Entering phase post_test ###########
+ 
+ 
+[DEVICEFARM] ########### Finish executing testspec ###########
+ 
+[DEVICEFARM] ########### Setting upload permissions ###########
+ 
+ 
+[DEVICEFARM] Tearing down your device. Your tests report will come shortly.
