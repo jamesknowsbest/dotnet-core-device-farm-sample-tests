@@ -102,7 +102,8 @@ In Device Farm's testspec.yml file download dotnet and unpackage it using the fo
       - ./dotnet --version 
 ```
 
-Then run the tests using the command `./dotnet test` 
+Then run the tests using the command `./dotnet test` full testspec file I used can be found here
+https://github.com/jamesknowsbest/dotnet-core-device-farm-sample-tests/blob/master/dotnet-testspec.yml
 
 To read more about using dotnet test in linux please follow this link: 
 https://github.com/nunit/docs/wiki/.NET-Core-and-.NET-Standard
