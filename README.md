@@ -41,7 +41,7 @@ unzip NUnit.zip -d NUnit
 mono ./NUnit/bin/net35/nunit3-console.exe bin/Debug/netcoreapp2.2/publish/dotnet-core-device-farm-sample-tests.dll 
 ```
 
-**Note**: Though it should be possible to download mono in Device Farm I found it very difficult to use. Here is the download page that Device Farm's testspec.yml file can use to get a pre-compiled mono installation
+**Note**: Though it should be possible to download mono in Device Farm I found it very difficult to use successfully. Here is the download page that Device Farm's testspec.yml file can use to get a pre-compiled mono installation
 https://download.mono-project.com/runtimes/raw/
 
 ## How to create a test package for Device Farm
@@ -85,6 +85,7 @@ aws devicefarm schedule-run --project-arn $PROJECT_ARN --device-pool-arn $DEVICE
 In Device Farm's testspec.yml file download dotnet and unpackage it using the following snippet
 
 ```
+# download page: https://github.com/dotnet/core/blob/master/release-notes/2.2/2.2.3/2.2.3-download.md
       - >-
         if [ $DEVICEFARM_DEVICE_PLATFORM_NAME = "Android" ];
         then
@@ -101,7 +102,9 @@ In Device Farm's testspec.yml file download dotnet and unpackage it using the fo
       - ./dotnet --version 
 ```
 
-Then run the tests using the command `./dotnet test` to read more about using dotnet test in linux please follow this link: 
+Then run the tests using the command `./dotnet test` 
+
+To read more about using dotnet test in linux please follow this link: 
 https://github.com/nunit/docs/wiki/.NET-Core-and-.NET-Standard
 
-I was not able to run commands with nunit-console as that would require mono to execute it. I did not find the correct permutation/combination to use in Device Farm such that mono is successful and reliable. 
+**Note**: I was not able to run commands with nunit-console as that would require mono to execute it. I did not find the correct permutation/combination to use in Device Farm such that mono is successful and reliable. 
