@@ -1,5 +1,5 @@
 # dotnet-core-device-farm-sample-tests
-Short project to show how to build a test package in dot-net for AWS Device Farm
+This is a short project to show how to build a test package in dot-net for AWS Device Farm. This is a proof of concept and may not be applicable to all features of dotnet or Appium. This project is provided without any warranty or guarantee. Happy testing :) 
 
 ## How did I create this project? 
 
